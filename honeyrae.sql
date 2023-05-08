@@ -1,0 +1,1 @@
+SELECT * FROM repairsapi_serviceticket
