@@ -25,6 +25,22 @@ class ServiceTicketView(ViewSet):
 
         return Response(serialized.data, status=status.HTTP_201_CREATED)
 
+    def update(self, request, pk=None):
+        """Handle PUT requests to update specific Service Tickets
+
+        Returns:
+            Response -- JSON serialized list of Service Tickets
+        """
+
+        ticket = ServiceTicket.objects.get(pk=pk)
+        employee_id = request.data["employee"]
+        assigned_employee = Employee.objects.get(pk=employee_id)
+        ticket.employee = assigned_employee
+
+        ticket.save()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
     def list(self, request):
         """Handle GET requests to get all Service Tickets
 
