@@ -9,6 +9,18 @@ from repairsapi.models import ServiceTicket, Employee, Customer
 class ServiceTicketView(ViewSet):
     """Honey Rae API Service Ticket View"""
 
+    def destroy(self, request, pk=None):
+        """Handle DELETE requests for service tickets
+
+        Returns:
+            Response: None with 204
+        """
+
+        service_ticket = ServiceTicket.objects.get(pk=pk)
+        service_ticket.delete()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
     def create(self, request):
         """Handle POST requests for service tickets
 
